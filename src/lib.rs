@@ -1,6 +1,6 @@
+use std::env;
 use std::error::Error;
 use std::fs;
-use std::env;
 use std::io::prelude::*;
 
 pub struct Config {
@@ -19,7 +19,11 @@ impl Config {
     let filename = args[2].clone();
     let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
 
-    Ok(Config { query, filename, case_sensitive })
+    Ok(Config {
+      query,
+      filename,
+      case_sensitive,
+    })
   }
 }
 
@@ -76,10 +80,7 @@ Rust:
 safe, fast, productive.
 Pick three.";
 
-    assert_eq!(
-      vec!["safe, fast, productive."],
-      search(query, contents)
-    );
+    assert_eq!(vec!["safe, fast, productive."], search(query, contents));
   }
 
   #[test]
